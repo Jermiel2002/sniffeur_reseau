@@ -43,7 +43,8 @@
 -----------------
 
 * INSTALLATION NECESSAIRE
-  > Il est nécessaire d'installer les bibliothèques pcap : `sudo apt install libpcap-dev`
+  * Il est nécessaire d'installer les bibliothèques pcap : `sudo apt install libpcap-dev`
+  * Le paquet pcap (packet capture) est une interface de programmation permettant de capturer un traffic réseau 
 
 -----------------
 
