@@ -1,7 +1,7 @@
 #ifndef __APPLICATION_H
 #define __APPLICATION_H
 
-#include <stdint.h>
+
 
 /******************structures dns et bootp
  * 
@@ -126,4 +126,30 @@ void telnet_view(const __u_char*, int);
  *  - Nscount: Codé sur 16 bits, il spécifie le nombre d’entrée dans la section « Autorité ».
  *  - Arcount: Codé sur 16 bits, il spécifie le nombre d’entrée dans la section « Additionnel ».
  * 
+ * *******************************************************************************************************
+ * **********************************BOOTP (précurseur du DHCP)*****************************
+ * Ce protocole de communication permettait pour la première fois aux terminaux et aux postes de travail sans 
+ * disque dur utilisés à l’époque d’obtenir en plus de l’adresse IP des informations telles que l’adresse de la passerelle, 
+ * l’adresse du serveur de démarrage et le registre du fichier de démarrage.
+ * 
+ * La communication de messages en vue de la transmission de l’information réseau est donc effectuée entre un client BOOTP et le serveur BOOTP. 
+ * 
+ * Voici à quoi ressemble la structure des messages envoyés par le client et le serveur lors de la communication par le biais du Bootstrap Protocol:
+ * 
+ *  - Op Code (1 octet) : Ce champ indique le type d'opération BOOTP en cours. Il peut avoir la valeur 1 pour une demande (client vers serveur) ou 2 pour une réponse (serveur vers client).
+ *  - Hardware Type (1 octet) : Ce champ spécifie le type de matériel du client, par exemple Ethernet (valeur 1) ou d'autres types de matériel.
+ *  - Hardware Address Length (1 octet) : Indique la longueur de l'adresse matérielle (MAC) en octets. Par exemple, pour une adresse MAC Ethernet, cela serait généralement de 6 octets.
+ *  - Hops (1 octet) : Ce champ est souvent utilisé pour le suivi du nombre de sauts entre les serveurs BOOTP. Il est généralement initialisé à zéro par le client BOOTP.
+ *  - Transaction ID (4 octets) : Un identifiant de transaction aléatoire généré par le client BOOTP pour suivre les demandes et les réponses correspondantes.
+ *  - Seconds (2 octets) : Le nombre de secondes écoulées depuis que le client BOOTP a commencé à essayer de démarrer. Ce champ peut être utilisé pour synchroniser les opérations temporaires.
+ *  - Flags (2 octets) : Divers drapeaux de contrôle, généralement non utilisés dans la plupart des implémentations BOOTP.
+ *  - Client IP Address (4 octets) : L'adresse IP actuellement attribuée au client, si disponible. C'est généralement 0.0.0.0 lors de la demande initiale.
+ *  - Your IP Address (4 octets) : L'adresse IP que le serveur BOOTP attribue au client.
+ *  - Server IP Address (4 octets) : L'adresse IP du serveur BOOTP qui répond à la demande du client.
+ *  - Gateway IP Address (4 octets) : L'adresse IP du routeur ou de la passerelle par défaut que le client peut utiliser.
+ *  - Client Hardware Address (variable) : L'adresse matérielle (MAC) du client.
+ *  - Server Host Name (variable) : Le nom du serveur BOOTP, s'il est connu.
+ *  - Boot File Name (variable) : Le nom du fichier de démarrage ou du fichier de configuration que le client doit utiliser.
+ *  - Vendor-Specific Information (variable) : Un champ optionnel qui peut contenir des informations spécifiques au fournisseur, telles que des options de configuration supplémentaires.
+ *  - magic_cookie (u_int32_t) : C'est un champ qui peut être utilisé pour identifier le début d'une option spécifique BOOTP ou DHCP. Il contient généralement une valeur spéciale (0x63825363) qui indique la présence d'options BOOTP ou DHCP
  *   */
